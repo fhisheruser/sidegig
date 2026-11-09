@@ -38,7 +38,7 @@ export class BraveSearch {
 
   async search(query: string, count: number): Promise<SearchResult[]> {
     if (!this.apiKey) {
-      throw new Error("BRAVE_SEARCH_API_KEY is missing. Add your Brave Search API key to the environment and restart Sidegig.");
+      throw new Error("BRAVE_SEARCH_API_KEY is missing. Add your Brave Search API key to the environment and restart Conet.");
     }
 
     const url = new URL("https://api.search.brave.com/res/v1/web/search");

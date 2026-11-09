@@ -3,7 +3,7 @@ import { createServer, type IncomingMessage, type Server, type ServerResponse } 
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import type { ProfileStore } from "./profile.js";
 import type { BraveSearch } from "./search.js";
-import { createSidegigServer } from "./server.js";
+import { createConetServer } from "./server.js";
 
 export interface HttpServerOptions {
   host: string;
@@ -19,7 +19,7 @@ export function startHttpServer(profileStore: ProfileStore, search: BraveSearch,
   const httpServer = createServer(async (request, response) => {
     if (request.url === "/health" && request.method === "GET") {
       response.writeHead(200, { "content-type": "application/json" });
-      response.end(JSON.stringify({ status: "ok", service: "sidegig" }));
+      response.end(JSON.stringify({ status: "ok", service: "conet" }));
       return;
     }
 
@@ -33,7 +33,7 @@ export function startHttpServer(profileStore: ProfileStore, search: BraveSearch,
       return;
     }
 
-    const mcpServer = createSidegigServer(profileStore, search);
+    const mcpServer = createConetServer(profileStore, search);
     const transport = new StreamableHTTPServerTransport({
       sessionIdGenerator: undefined,
       enableJsonResponse: true
@@ -68,7 +68,7 @@ export function startHttpServer(profileStore: ProfileStore, search: BraveSearch,
       httpServer.off("error", reject);
       const address = httpServer.address();
       const port = typeof address === "object" && address ? address.port : options.port;
-      console.error(`Sidegig MCP HTTP server listening at http://${options.host}:${port}/mcp`);
+      console.error(`Conet MCP HTTP server listening at http://${options.host}:${port}/mcp`);
       resolve(httpServer);
     });
   });

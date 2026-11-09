@@ -50,5 +50,5 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
 }
 
 server.listen(port, "127.0.0.1", () => {
-  console.log(`Sidegig website running at http://127.0.0.1:${port}`);
+  console.log(`Conet website running at http://127.0.0.1:${port}`);
 });

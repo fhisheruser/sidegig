@@ -1,6 +1,6 @@
-# Sidegig
+# Conet
 
-Sidegig is a small Claude connector for startup owners. Set the kind of people you need, find public web pages that may be relevant, and draft one-to-one introductions for review. Switch the saved audience whenever your priority changes—for example, from healthcare customers to healthcare marketing hires.
+Conet is a small Claude connector for startup owners. Set the kind of people you need, find public web pages that may be relevant, and draft one-to-one introductions for review. Switch the saved audience whenever your priority changes—for example, from healthcare customers to healthcare marketing hires.
 
 There is no separate dashboard in this first version; Claude is the interface, with a short set of tools and plain-language prompts.
 
@@ -11,7 +11,7 @@ There is no separate dashboard in this first version; Claude is the interface, w
 - Drafts individual introductions for you to review; it never sends messages or campaigns.
 - Runs as a local MCP server for Claude Desktop, or as an authenticated HTTP MCP server that can be deployed for Claude's remote connectors.
 
-This first version does not directly integrate with LinkedIn, other social platforms, or email services. Sidegig does not log in to or scrape social networks, verify that a result is a good lead, or collect email addresses. Search results are leads to review, not endorsements. Use contact details only when you have a lawful basis to do so and follow applicable privacy and marketing rules.
+This first version does not directly integrate with LinkedIn, other social platforms, or email services. Conet does not log in to or scrape social networks, verify that a result is a good lead, or collect email addresses. Search results are leads to review, not endorsements. Use contact details only when you have a lawful basis to do so and follow applicable privacy and marketing rules.
 
 ## Requirements
 
@@ -34,9 +34,9 @@ Build the project, then add a server entry to Claude Desktop's `claude_desktop_c
 ```json
 {
   "mcpServers": {
-    "sidegig": {
+    "conet": {
       "command": "node",
-      "args": ["C:\\path\\to\\sidegig\\dist\\index.js", "--stdio"],
+      "args": ["C:\\path\\to\\conet\\dist\\index.js", "--stdio"],
       "env": {
         "BRAVE_SEARCH_API_KEY": "your-brave-search-api-key"
       }
@@ -45,7 +45,7 @@ Build the project, then add a server entry to Claude Desktop's `claude_desktop_c
 }
 ```
 
-Restart Claude Desktop after editing the config. Local profile data is stored in `~/.sidegig/audience-profile.json` (on Windows, the home directory is your user profile). Set `SIDGIG_PROFILE_PATH` to choose another location.
+Restart Claude Desktop after editing the config. Local profile data is stored in `~/.conet/audience-profile.json` (on Windows, the home directory is your user profile). Set `CONET_PROFILE_PATH` to choose another location.
 
 ## Connect as a remote Claude connector
 
@@ -62,7 +62,7 @@ Claude Desktop can also connect to this remote endpoint as a custom connector. T
 
 ## Use it
 
-In Claude, ask Sidegig to:
+In Claude, ask Conet to:
 
 1. Use `set_audience` with `goal` set to `find_customers` or `hire_marketers`, and fill in the business, industry, audience, and optional geography/offer.
 2. Use `find_prospects` to get public web results. You can change the location or provide a narrower search phrase.

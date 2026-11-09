@@ -2,7 +2,7 @@ import "dotenv/config";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { FileProfileStore } from "./profile.js";
 import { BraveSearch } from "./search.js";
-import { createSidegigServer } from "./server.js";
+import { createConetServer } from "./server.js";
 import { startHttpServer } from "./http.js";
 
 async function main(): Promise<void> {
@@ -11,7 +11,7 @@ async function main(): Promise<void> {
   const mode = process.argv[2] ?? "--stdio";
 
   if (mode === "--stdio") {
-    const server = createSidegigServer(profileStore, search);
+    const server = createConetServer(profileStore, search);
     await server.connect(new StdioServerTransport());
     return;
   }

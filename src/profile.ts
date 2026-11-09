@@ -23,7 +23,7 @@ export interface ProfileStore {
 export class FileProfileStore implements ProfileStore {
   private readonly path: string;
 
-  constructor(path = process.env.SIDGIG_PROFILE_PATH || join(homedir(), ".sidegig", "audience-profile.json")) {
+  constructor(path = process.env.CONET_PROFILE_PATH || join(homedir(), ".conet", "audience-profile.json")) {
     this.path = path;
   }
 

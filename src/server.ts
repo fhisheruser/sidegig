@@ -4,9 +4,9 @@ import type { ProfileStore } from "./profile.js";
 import { audienceProfileSchema } from "./profile.js";
 import { buildSearchQuery, type BraveSearch } from "./search.js";
 
-export function createSidegigServer(profileStore: ProfileStore, search: BraveSearch): McpServer {
+export function createConetServer(profileStore: ProfileStore, search: BraveSearch): McpServer {
   const server = new McpServer({
-    name: "sidegig",
+    name: "conet",
     version: "0.1.0"
   });
 
@@ -14,7 +14,7 @@ export function createSidegigServer(profileStore: ProfileStore, search: BraveSea
     "set_audience",
     {
       title: "Set my audience",
-      description: "Choose whether Sidegig should find potential customers or marketing hires, then save the business and audience details. Use this again any time the startup's needs change.",
+      description: "Choose whether Conet should find potential customers or marketing hires, then save the business and audience details. Use this again any time the startup's needs change.",
       inputSchema: {
         goal: audienceProfileSchema.shape.goal,
         business: audienceProfileSchema.shape.business,
@@ -27,7 +27,7 @@ export function createSidegigServer(profileStore: ProfileStore, search: BraveSea
     async (input) => {
       const profile = audienceProfileSchema.parse(input);
       await profileStore.set(profile);
-      return textResult(`Audience saved. Sidegig will look for ${profile.audience} to ${profile.goal === "find_customers" ? "reach as potential customers" : "consider for marketing roles"} in ${profile.industry}${profile.geography ? `, in ${profile.geography}` : ""}. You can change these preferences at any time.`);
+      return textResult(`Audience saved. Conet will look for ${profile.audience} to ${profile.goal === "find_customers" ? "reach as potential customers" : "consider for marketing roles"} in ${profile.industry}${profile.geography ? `, in ${profile.geography}` : ""}. You can change these preferences at any time.`);
     }
   );
 
@@ -35,7 +35,7 @@ export function createSidegigServer(profileStore: ProfileStore, search: BraveSea
     "get_audience",
     {
       title: "View my audience",
-      description: "Show the current business, industry, audience, goal, and geography saved in Sidegig."
+      description: "Show the current business, industry, audience, goal, and geography saved in Conet."
     },
     async () => {
       const profile = await profileStore.get();
@@ -47,7 +47,7 @@ export function createSidegigServer(profileStore: ProfileStore, search: BraveSea
     "find_prospects",
     {
       title: "Find prospects",
-      description: "Search public web pages for people or organizations matching the saved audience. Results are links and public snippets from Brave Search, not verified leads. Sidegig does not scrape social networks, collect email addresses, or send messages. Ask before searching if no audience has been saved.",
+      description: "Search public web pages for people or organizations matching the saved audience. Results are links and public snippets from Brave Search, not verified leads. Conet does not scrape social networks, collect email addresses, or send messages. Ask before searching if no audience has been saved.",
       inputSchema: {
         query: z.string().trim().min(1).max(200).optional().describe("Optional search phrase to narrow or replace the audience-based search."),
         geography: z.string().trim().min(1).max(120).optional().describe("Optional location, such as a country, region, or 'anywhere'."),

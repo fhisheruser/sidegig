@@ -30,7 +30,7 @@ test("authenticated HTTP transport supports MCP initialization and tool calls", 
   });
   const address = server.address() as AddressInfo;
   const endpoint = `http://127.0.0.1:${address.port}/mcp`;
-  const client = new Client({ name: "sidegig-test", version: "0.1.0" });
+  const client = new Client({ name: "conet-test", version: "0.1.0" });
 
   try {
     const unauthorized = await fetch(endpoint);
@@ -70,18 +70,18 @@ test("authenticated HTTP transport supports MCP initialization and tool calls", 
 });
 
 test("stdio transport supports the same MCP tools", async () => {
-  const profilePath = join(tmpdir(), `sidegig-test-${randomUUID()}.json`);
+  const profilePath = join(tmpdir(), `conet-test-${randomUUID()}.json`);
   const env = Object.fromEntries(
     Object.entries(process.env).filter((entry): entry is [string, string] => typeof entry[1] === "string")
   );
-  env.SIDGIG_PROFILE_PATH = profilePath;
+  env.CONET_PROFILE_PATH = profilePath;
   const transport = new StdioClientTransport({
     command: process.execPath,
     args: [join(process.cwd(), "node_modules", "tsx", "dist", "cli.mjs"), "src/index.ts", "--stdio"],
     cwd: process.cwd(),
     env
   });
-  const client = new Client({ name: "sidegig-stdio-test", version: "0.1.0" });
+  const client = new Client({ name: "conet-stdio-test", version: "0.1.0" });
 
   try {
     await client.connect(transport);
