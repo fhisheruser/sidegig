@@ -72,7 +72,10 @@ In Claude, ask Sidegig to:
 ## Development
 
 ```sh
+npm run website
 npm run dev
 npm test
 npm run build
 ```
+
+`npm run website` starts the product website at `http://127.0.0.1:4173`. To use another port, set `WEBSITE_PORT` before starting it.
